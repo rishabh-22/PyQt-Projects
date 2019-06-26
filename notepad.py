@@ -1,4 +1,3 @@
-import os
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QWidget
 from PyQt5.QtWidgets import QTextEdit, QVBoxLayout, QHBoxLayout, QAction, qApp
