@@ -1,11 +1,10 @@
 import psutil
 
-rows = 0
-listOfProcObjects = []
 
-def getListOfProcesses():
+def get_list_of_processes():
 
-    global listOfProcObjects
+    list_of_processes = []
+
     # Iterate over the list
     for proc in psutil.process_iter():
         try:
@@ -16,18 +15,12 @@ def getListOfProcesses():
             pinfo['path'] = proc.cwd()
 
             # Append dict to list
-            listOfProcObjects.append(pinfo)
+            list_of_processes.append(pinfo)
 
         except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
             pass
 
     # Sort list of dict by key vms i.e. memory usage
-    listOfProcObjects = sorted(listOfProcObjects, key=lambda procObj: procObj['vms'])
+    list_of_processes = sorted(list_of_processes, key=lambda proc_obj: proc_obj['vms'])
 
-    print(listOfProcObjects)
-    global rows
-    rows = len(listOfProcObjects)
-    print(rows)
-    return listOfProcObjects
-
-getListOfProcesses()
+    return list_of_processes
