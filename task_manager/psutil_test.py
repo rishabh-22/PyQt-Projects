@@ -14,6 +14,7 @@ def getListOfProcesses():
             pinfo['vms'] = proc.memory_info().vms
             pinfo['cpu'] = proc.cpu_percent()
             pinfo['path'] = proc.cwd()
+
             # Append dict to list
             listOfProcObjects.append(pinfo)
 
@@ -22,7 +23,7 @@ def getListOfProcesses():
 
     # Sort list of dict by key vms i.e. memory usage
     listOfProcObjects = sorted(listOfProcObjects, key=lambda procObj: procObj['vms'])
-    # import pdb; pdb.set_trace()
+
     print(listOfProcObjects)
     global rows
     rows = len(listOfProcObjects)

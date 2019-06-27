@@ -12,6 +12,9 @@ class MyTable(QTableWidget):
         self.show()
 
 
+# global declaration of respective values in lists
+
+
 pids = [li['pid'] for li in psutil_test.listOfProcObjects]
 names = [li['name'] for li in psutil_test.listOfProcObjects]
 users = [li['username'] for li in psutil_test.listOfProcObjects]
@@ -29,6 +32,7 @@ class TaskManager(QMainWindow):
         col_headers = ['Process ID', 'Process Name', 'User', 'Memory', 'CPU Usage', 'Path']
         self.form_widget.setHorizontalHeaderLabels(col_headers)
 
+        # assigning values to the respective columns from respective lists, row by row
         i = 0
         for (id, name, user, mem, cpu, path) in zip(pids, names, users, mems, cpus, paths):
             col1 = QTableWidgetItem(str(id))
@@ -37,8 +41,7 @@ class TaskManager(QMainWindow):
             col4 = QTableWidgetItem(str(mem))
             col5 = QTableWidgetItem(str(cpu))
             col6 = QTableWidgetItem(str(path))
-            # print(id)
-            # self.form_widget.setCurrentCell(i, 0)
+
             self.form_widget.setItem(i, 0, col1)
             self.form_widget.setItem(i, 1, col2)
             self.form_widget.setItem(i, 2, col3)
@@ -49,13 +52,6 @@ class TaskManager(QMainWindow):
             i += 1
 
         self.show()
-
-
-# print(psutil_test.listOfProcObjects[0])
-
-
-# print("Hello", len(paths))
-
 
 
 app = QApplication(sys.argv)
