@@ -3,9 +3,11 @@ import psutil
 rows = 0
 listOfProcObjects = []
 
+
 def getListOfProcesses():
 
     global listOfProcObjects
+    listOfProcObjects = []
     # Iterate over the list
     for proc in psutil.process_iter():
         try:
