@@ -13,9 +13,6 @@ class MyTable(QTableWidget):
         self.show()
 
 
-# global declaration of respective values in lists
-
-
 pids = [li['pid'] for li in psutil_test.listOfProcObjects]
 names = [li['name'] for li in psutil_test.listOfProcObjects]
 users = [li['username'] for li in psutil_test.listOfProcObjects]
@@ -36,6 +33,7 @@ class TaskManager(QMainWindow):
         self.timer.setInterval(3000)
         self.timer.timeout.connect(self.change_values)
 
+<<<<<<< HEAD
     def show_task(self):
         # assigning values to the respective columns from respective lists, row by row
         # i = 0
@@ -55,6 +53,25 @@ class TaskManager(QMainWindow):
         #     self.form_widget.setItem(i, 5, col6)
         #
         #     i += 1
+=======
+        i = 0
+        for (id, name, user, mem, cpu, path) in zip(pids, names, users, mems, cpus, paths):
+            col1 = QTableWidgetItem(str(id))
+            col2 = QTableWidgetItem(str(name))
+            col3 = QTableWidgetItem(str(user))
+            col4 = QTableWidgetItem(str(mem))
+            col5 = QTableWidgetItem(str(cpu))
+            col6 = QTableWidgetItem(str(path))
+
+            self.form_widget.setItem(i, 0, col1)
+            self.form_widget.setItem(i, 1, col2)
+            self.form_widget.setItem(i, 2, col3)
+            self.form_widget.setItem(i, 3, col4)
+            self.form_widget.setItem(i, 4, col5)
+            self.form_widget.setItem(i, 5, col6)
+
+            i += 1
+>>>>>>> 58dba02b921e1a128b72e9db56c33d8e4cd02e64
 
         self.show()
 
