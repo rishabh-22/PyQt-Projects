@@ -6,7 +6,6 @@ listOfProcObjects = []
 
 def getListOfProcesses():
 
-
     global listOfProcObjects
     listOfProcObjects = []
 

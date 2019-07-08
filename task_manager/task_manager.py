@@ -34,6 +34,7 @@ class TaskManager(QMainWindow):
     def change_values(self):
 
         new_list = psutil_test.getListOfProcesses()
+        # final_list = sort_list(new_list, key, flag)
         self.form_widget.setRowCount(len(new_list))
         # print(new_list)
 
