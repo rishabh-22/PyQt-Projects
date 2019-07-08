@@ -1,5 +1,7 @@
 import sys
-from PyQt5.QtWidgets import QTableWidget, QApplication, QMainWindow, QTableWidgetItem
+
+import psutil
+from PyQt5.QtWidgets import QTableWidget, QApplication, QMainWindow, QTableWidgetItem, QMenu
 from PyQt5 import QtCore
 import psutil_test
 
@@ -11,6 +13,9 @@ class MyTable(QTableWidget):
 
     def init_ui(self):
         self.show()
+
+    def get_current_id(self):
+        return self.item(self.currentRow(), 0).text()
 
 
 class TaskManager(QMainWindow):
@@ -30,7 +35,7 @@ class TaskManager(QMainWindow):
 
         new_list = psutil_test.getListOfProcesses()
         self.form_widget.setRowCount(len(new_list))
-        print(new_list)
+        # print(new_list)
 
         for i, process in enumerate(new_list):
             self.form_widget.setItem(i, 0, QTableWidgetItem(str(process['pid'])))
@@ -39,6 +44,19 @@ class TaskManager(QMainWindow):
             self.form_widget.setItem(i, 3, QTableWidgetItem(str(process['vms'])))
             self.form_widget.setItem(i, 4, QTableWidgetItem(str(process['cpu'])))
             self.form_widget.setItem(i, 5, QTableWidgetItem(str(process['path'])))
+
+    def contextMenuEvent(self, event):
+        context_menu = QMenu(self)
+        kill_act = context_menu.addAction("Kill")
+        quit_act = context_menu.addAction("Quit")
+        action = context_menu.exec_(self.mapToGlobal(event.pos()))
+        if action == quit_act:
+            self.close()
+        if action == kill_act:
+            id = self.form_widget.get_current_id()
+            print(id)
+            process = psutil.Process(pid=int(id))
+            print(process.cpu_percent())
 
 
 app = QApplication(sys.argv)

@@ -28,10 +28,10 @@ def getListOfProcesses():
     # Sort list of dict by key vms i.e. memory usage
     listOfProcObjects = sorted(listOfProcObjects, key=lambda procObj: procObj['vms'])
 
-    print(listOfProcObjects)
+    # print(listOfProcObjects)
     global rows
     rows = len(listOfProcObjects)
-    print(rows)
+    # print(rows)
     return listOfProcObjects
 
 getListOfProcesses()
